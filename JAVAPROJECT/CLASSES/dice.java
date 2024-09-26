@@ -7,16 +7,18 @@ public class dice {
     public static void generateDice() {
 
         // create an array with the dice resoults
-        double diceArray[] = new double[6];
+        int diceArray[] = new int[6];
 
         // for loop to get 5 random numbers and store them in the array
-        for (int dice = 1; dice < 6; dice++) {
+        for (int dice = 1; dice < diceArray.length; dice++) {
 
             // make a variable that stores random numbers between 1 - 6
             double randomNum = Math.floor(Math.random() * 6 + 1);
 
+            int randomInt = (int) Math.round(randomNum);
+
             // use the index dice and assign the random number to it
-            diceArray[dice] = randomNum;
+            diceArray[dice] = randomInt;
 
             // print the array
             System.out.println("Dice number " + dice + ": " + diceArray[dice]);
@@ -25,7 +27,7 @@ public class dice {
         dice.keepDice(diceArray);
     }
 
-    public static void keepDice(double[] args) {
+    public static void keepDice(int[] args) {
         // get user to select a dice
         Scanner input = new Scanner(System.in);
         System.out.println("Select the dice number you want to keep: ");
