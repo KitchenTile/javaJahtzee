@@ -4,41 +4,67 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class dice {
-    public static void generateDice() {
 
-        // create an array with the dice resoults
-        int diceArray[] = new int[6];
+    // create an array with the dice resoults
+    int diceArray[];
 
-        // for loop to get 5 random numbers and store them in the array
-        for (int dice = 1; dice < diceArray.length; dice++) {
+    // Create an empty array for the dice the user wants to keep
+    int keptDice[];
 
-            // make a variable that stores random numbers between 1 - 6
-            double randomNum = Math.floor(Math.random() * 6 + 1);
-
-            int randomInt = (int) Math.round(randomNum);
-
-            // use the index dice and assign the random number to it
-            diceArray[dice] = randomInt;
-
-            // print the array
-            System.out.println("Dice number " + dice + ": " + diceArray[dice]);
-
-        }
-        dice.keepDice(diceArray);
+    // create constructor so hopefully the arrays keep their data
+    public dice() {
+        diceArray = new int[6];
+        keptDice = new int[5];
     }
 
-    public static void keepDice(int[] args) {
+    public static void generateDice() {
+        // initialize constructor
+        dice dice = new dice();
+
+        // for loop to get 5 random numbers and store them in the array
+        for (int diceNumber = 1; diceNumber < dice.diceArray.length; diceNumber++) {
+
+            // make a variable that stores random numbers between 1 - 6 -- use a cast to
+            // make randomNum into an int instead of double
+            int randomNum = (int) Math.floor(Math.random() * 6 + 1);
+
+            // use the index dice and assign the random number to it
+            dice.diceArray[diceNumber] = randomNum;
+
+            // print the array
+            System.out.println("Dice number " + diceNumber + ": " + dice.diceArray[diceNumber]);
+
+        }
+
+        // we call the second method so it plays right after we generate the dice
+        dice.keepDice(dice.diceArray, dice.keptDice);
+    }
+
+    public static void keepDice(int[] diceArray, int[] keptDice) {
         // get user to select a dice
         Scanner input = new Scanner(System.in);
-        System.out.println("Select the dice number you want to keep: ");
+        System.out.print("Select the dice number you want to keep: ");
         int diceIndex = input.nextInt();
 
-        double keptDice[] = new double[6];
+        // to match both lists we need to substact the input index by 1 since we made
+        // the list start 1 index number "ahead" (when we select 1, we really want to
+        // pount at 0)
+        keptDice[diceIndex - 1] = diceArray[diceIndex];
+        System.out.println(keptDice[diceIndex - 1]);
+        System.out.println(keptDice);
 
-        keptDice[diceIndex] = args[diceIndex];
-
-        System.out.println(keptDice[diceIndex]);
-
+        // Do this to print the array in a way I am used to seeing it
         System.out.println(Arrays.toString(keptDice));
+
+        Scanner inputNewDice = new Scanner(System.in);
+        System.out.print("Would you like to select an other dice to keep? y/n: ");
+        String keepAnotherDice = inputNewDice.nextLine();
+
+        if (keepAnotherDice.equalsIgnoreCase("y")) {
+            dice.keepDice(diceArray, keptDice);
+        } else {
+            System.out.println("Selected dice: " + Arrays.toString(keptDice));
+            System.out.println(keepAnotherDice);
+        }
     }
 }
