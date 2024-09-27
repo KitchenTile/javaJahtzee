@@ -3,7 +3,7 @@ package JAVAPROJECT.CLASSES;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class dice {
+public class Dice {
 
     // create an array with the dice resoults
     int diceArray[];
@@ -12,17 +12,17 @@ public class dice {
     int keptDice[];
 
     // create constructor so hopefully the arrays keep their data
-    public dice() {
-        diceArray = new int[6];
+    public void dice() {
+        diceArray = new int[5];
         keptDice = new int[5];
     }
 
     public static void generateDice() {
         // initialize constructor
-        dice dice = new dice();
+        Dice dice = new Dice();
 
         // for loop to get 5 random numbers and store them in the array
-        for (int diceNumber = 1; diceNumber < dice.diceArray.length; diceNumber++) {
+        for (int diceNumber = 0; diceNumber < dice.diceArray.length; diceNumber++) {
 
             // make a variable that stores random numbers between 1 - 6 -- use a cast to
             // make randomNum into an int instead of double
@@ -32,7 +32,7 @@ public class dice {
             dice.diceArray[diceNumber] = randomNum;
 
             // print the array
-            System.out.println("Dice number " + diceNumber + ": " + dice.diceArray[diceNumber]);
+            System.out.println("Dice number " + (diceNumber + 1) + ": " + dice.diceArray[diceNumber]);
 
         }
 
@@ -46,22 +46,28 @@ public class dice {
         System.out.print("Select the dice number you want to keep: ");
         int diceIndex = input.nextInt();
 
-        // to match both lists we need to substact the input index by 1 since we made
-        // the list start 1 index number "ahead" (when we select 1, we really want to
-        // pount at 0)
-        keptDice[diceIndex - 1] = diceArray[diceIndex];
-        System.out.println(keptDice[diceIndex - 1]);
-        System.out.println(keptDice);
+        // // if the selected dice is within the boundaries of the array
+        if (0 < diceIndex && diceIndex <= diceArray.length) { // if statement does not work
+            // to match both lists we need to substact the input index by 1 since we made
+            // the list start 1 index number "ahead" (when we select 1, we really want to
+            // pount at 0)
+            keptDice[diceIndex - 1] = diceArray[diceIndex - 1];
+            System.out.println(keptDice[diceIndex - 1]);
+            System.out.println(keptDice);
 
-        // Do this to print the array in a way I am used to seeing it
-        System.out.println(Arrays.toString(keptDice));
+            // Do this to print the array in a way I am used to seeing it
+            System.out.println(Arrays.toString(keptDice));
+        } else {
+            System.out.println("please enter a valid dice number");
+            Dice.keepDice(diceArray, keptDice);
+        }
 
         Scanner inputNewDice = new Scanner(System.in);
         System.out.print("Would you like to select an other dice to keep? y/n: ");
         String keepAnotherDice = inputNewDice.nextLine();
 
         if (keepAnotherDice.equalsIgnoreCase("y")) {
-            dice.keepDice(diceArray, keptDice);
+            Dice.keepDice(diceArray, keptDice);
         } else {
             System.out.println("Selected dice: " + Arrays.toString(keptDice));
             System.out.println(keepAnotherDice);
