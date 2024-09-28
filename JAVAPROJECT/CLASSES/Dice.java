@@ -11,30 +11,11 @@ public class Dice {
     // Create an empty array for the dice the user wants to keep
     int[] keptDice;
 
-    // Max number of rerolls
-    int maxReroll = 2;
-
     // create constructor so hopefully the arrays keep their data
     public Dice() {
         diceArray = new int[5];
         keptDice = new int[5];
 
-    }
-
-    public void turn() {
-        // function to representa turn, ideally will be called for each player back to
-        // back for a set number of turns
-        generateDice();
-        keepDice();
-
-        // if the reroll index is lower than max, reroll and call keepDice
-        for (int i = 0; i < maxReroll; i++) {
-            System.out.println("Reroll number: " + (i + 1));
-            rerollDice();
-            keepDice();
-        }
-
-        System.out.println("TURN FINISHED");
     }
 
     public void generateDice() {
@@ -104,5 +85,3 @@ public class Dice {
         System.out.println("The new dice array is: " + Arrays.toString(diceArray));
     }
 }
-
-//
