@@ -1,5 +1,5 @@
 package JAVAPROJECT.CLASSES;
 
-public class game {
+public class Game {
 
 }
