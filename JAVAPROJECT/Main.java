@@ -1,12 +1,10 @@
-import JAVAPROJECT.CLASSES.Dice;
+import JAVAPROJECT.CLASSES.Player;
 
 public class Main {
 
     public static void main(String[] args) {
         // initialize Dice constructor
-        Dice dice = new Dice();
-
-        dice.turn();
+        Player player1 = new Player("Blue");
     }
 
 }
