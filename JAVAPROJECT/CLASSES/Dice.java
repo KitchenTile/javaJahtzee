@@ -11,10 +11,30 @@ public class Dice {
     // Create an empty array for the dice the user wants to keep
     int[] keptDice;
 
+    // Max number of rerolls
+    int maxReroll = 2;
+
     // create constructor so hopefully the arrays keep their data
     public Dice() {
         diceArray = new int[5];
         keptDice = new int[5];
+
+    }
+
+    public void turn() {
+        // function to representa turn, ideally will be called for each player back to
+        // back for a set number of turns
+        generateDice();
+        keepDice();
+
+        // if the reroll index is lower than max, reroll and call keepDice
+        for (int i = 0; i < maxReroll; i++) {
+            System.out.println("Reroll number: " + (i + 1));
+            rerollDice();
+            keepDice();
+        }
+
+        System.out.println("TURN FINISHED");
     }
 
     public void generateDice() {
@@ -31,11 +51,11 @@ public class Dice {
 
             // print the array
             System.out.println("Dice number " + (diceNumber + 1) + ": " + diceArray[diceNumber]);
-
         }
 
         // we call the second method so it plays right after we generate the dice
-        keepDice();
+        // keepDice();
+
     }
 
     public void keepDice() {
@@ -45,7 +65,7 @@ public class Dice {
         int diceIndex = input.nextInt();
 
         // // if the selected dice is within the boundaries of the array
-        if (0 < diceIndex && diceIndex <= diceArray.length) { // if statement does not work
+        if (0 < diceIndex && diceIndex <= diceArray.length) {
             // to match both lists we need to substact the input index by 1 since we made
             // the list start 1 index number "ahead" (when we select 1, we really want to
             // pount at 0). In short, we are adjusting for a 0 base index.
@@ -68,10 +88,21 @@ public class Dice {
             keepDice();
         } else {
             System.out.println("Selected dice: " + Arrays.toString(keptDice));
-            System.out.println(keepAnotherDice);
         }
 
-        input.close();
-        inputNewDice.close();
+        // input.close();
+        // inputNewDice.close();
+    }
+
+    public void rerollDice() {
+        // for loop to reroll the dice that have not been selected.
+        for (int index = 0; index < diceArray.length; index++) {
+            if (keptDice[index] == 0) {
+                diceArray[index] = (int) Math.floor(Math.random() * 6 + 1);
+            }
+        }
+        System.out.println("The new dice array is: " + Arrays.toString(diceArray));
     }
 }
+
+//
