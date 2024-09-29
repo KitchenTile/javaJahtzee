@@ -1,10 +1,15 @@
+package JAVAPROJECT;
+
 import JAVAPROJECT.CLASSES.Player;
 
 public class Main {
 
     public static void main(String[] args) {
         // initialize Dice constructor
-        Player player1 = new Player("Blue");
+        Player blue = new Player("Blue");
+        Player julia = new Player("Julia");
+        Player carl = new Player("Carl");
+
     }
 
 }
