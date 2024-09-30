@@ -31,7 +31,7 @@ public class Player {
         diceRollArray = new int[12];
         turnOne = true;
 
-        Scanner nameInput = new Scanner(System.in);
+        Scanner nameInput = new Scanner(System.in); // needs closing
         System.out.print("Please enter your name: ");
         name = nameInput.nextLine();
     }
