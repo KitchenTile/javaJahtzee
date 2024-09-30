@@ -16,7 +16,7 @@ public class Player {
     int three;
     int four;
     int five;
-    int sixe;
+    int six;
     int totalScore;
 
     // Array with 13 spaces for the roll results
@@ -31,12 +31,16 @@ public class Player {
     // initialize Dice constructor
     Dice dice = new Dice();
 
-    public Player(String name) {
+    String name;
+
+    public Player() {
         totalScore = 0;
         diceRollArray = new int[12];
         turnOne = true;
 
-        turn();
+        Scanner nameInput = new Scanner(System.in);
+        System.out.print("Please enter your name: ");
+        name = nameInput.nextLine();
     }
 
     // function to representa turn, ideally will be called for each player back to
@@ -81,6 +85,10 @@ public class Player {
         // System.out.println("What column would you like to assing this value to?
         // (COLUMN MUST BE UNIQUE)");
         // }
+    }
+
+    public int[] getDiceRollArray() {
+        return diceRollArray;
     }
 
 }
