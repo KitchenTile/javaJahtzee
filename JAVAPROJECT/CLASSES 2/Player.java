@@ -9,14 +9,7 @@ import java.util.Scanner;
 
 public class Player {
 
-    // create variables for differnet scores?
-    // maybe I should create a differnt class for the scores... ask
-    int one;
-    int two;
-    int three;
-    int four;
-    int five;
-    int six;
+    // variable for each player's total score
     int totalScore;
 
     // Array with 13 spaces for the roll results

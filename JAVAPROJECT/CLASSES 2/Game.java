@@ -67,6 +67,8 @@ public class Game {
 
     public void play() {
 
+        // for the duration of a game play each player's turn -- need to add first turn
+        // restriction
         for (int currentTurn = 0; currentTurn < numberOfTurns; currentTurn++) {
             for (int playerIndex = 0; playerIndex < playersList.length; playerIndex++) {
                 System.out.println(playersList[playerIndex].name + "'s Turn");
