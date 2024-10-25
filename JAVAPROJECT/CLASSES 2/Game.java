@@ -19,6 +19,7 @@ public class Game {
 
     int XCHAR = -1;
 
+    // Array of booleans to check the first turn column is not chosen by two people
     boolean[] firstTurnArray = new boolean[11];
 
     // initializes as 12 falses. I'll use them to accurately check arrays for scores
@@ -85,18 +86,33 @@ public class Game {
     public void gameTable() {
 
         // a bunch of print statements, it looks bad
-        System.out.println("----------------------------------------------");
-        System.out.println("----------------------------------------------");
+        // System.out.println("----------------------------------------------");
+        // System.out.println("----------------------------------------------");
 
-        System.out.println("Game table:");
-        System.out.println(Arrays.toString(scoreBoardTop));
-        for (int playerIndex = 0; playerIndex < playersList.length; playerIndex++) {
-            System.out.println(
-                    playersList[playerIndex].name + ": "
-                            + " " + Arrays.toString(playersList[playerIndex].getDiceRollArray())
-                            + " " + playersList[playerIndex].totalScore);
-        }
+        // System.out.println("Game table:");
+        // System.out.println(Arrays.toString(scoreBoardTop));
+        // for (int playerIndex = 0; playerIndex < playersList.length; playerIndex++) {
+        // System.out.println(
+        // playersList[playerIndex].name + ": "
+        // + " " + Arrays.toString(playersList[playerIndex].getDiceRollArray())
+        // + " " + playersList[playerIndex].totalScore);
+        // }
+        // System.out.println("----------------------------------------------");
+        // System.out.println("----------------------------------------------");
+
+        String rowFormat = "| %-10s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-5s |%n";
+
         System.out.println("----------------------------------------------");
+        System.out.printf(rowFormat, (Object[]) scoreBoardTop); // Print header
+
+        // Print player rows
+        for (Player player : playersList) {
+            System.out.printf(rowFormat,
+                    player.name,
+                    (Object[]) player.getDiceRollArray(),
+                    player.totalScore);
+        }
+
         System.out.println("----------------------------------------------");
     }
 
