@@ -4,9 +4,14 @@ import java.util.Arrays;
 
 public class Game {
 
-    // on the score keeping class we access the getters from the three player
-    // instances and compare the values of the index of the arrays when the column
-    // is complete, then we give the winner the points.
+    // in the game class we:
+    // - access the getters from the three player instances and compare the
+    // values of the index of the arrays when the column is complete, then
+    // we give the winner the points.
+    // - print the game table after every turn.
+    // - compare the scores when the game is over and decide a winner.
+    // - run the turn logic.
+
     Player player1 = new Player();
     Player player2 = new Player();
     Player player3 = new Player();
@@ -85,35 +90,33 @@ public class Game {
 
     public void gameTable() {
 
-        // a bunch of print statements, it looks bad
-        // System.out.println("----------------------------------------------");
-        // System.out.println("----------------------------------------------");
+        // I use rowFormat to format my table. It works similarly to String.format()
+        // but printing straight to the console, so it saves a step.
+        String rowFormat = "| %-10s | %-2s | %-2s | %-2s | %-2s | %-2s | %-2s | %-2s | %-2s | %-2s | %-2s | %-2s | %-5s |%n";
 
-        // System.out.println("Game table:");
-        // System.out.println(Arrays.toString(scoreBoardTop));
-        // for (int playerIndex = 0; playerIndex < playersList.length; playerIndex++) {
-        // System.out.println(
-        // playersList[playerIndex].name + ": "
-        // + " " + Arrays.toString(playersList[playerIndex].getDiceRollArray())
-        // + " " + playersList[playerIndex].totalScore);
-        // }
-        // System.out.println("----------------------------------------------");
-        // System.out.println("----------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------");
 
-        String rowFormat = "| %-10s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-3s | %-5s |%n";
+        // Print header - asks me to cast Object[] on scoreBoardTop
+        System.out.printf(rowFormat, (Object[]) scoreBoardTop);
 
-        System.out.println("----------------------------------------------");
-        System.out.printf(rowFormat, (Object[]) scoreBoardTop); // Print header
+        // for loop to get all three players
+        for (int playerIndex = 0; playerIndex < playersList.length; playerIndex++) {
+            int[] playersDiceRollArray = playersList[playerIndex].getDiceRollArray();
 
-        // Print player rows
-        for (Player player : playersList) {
+            // Print player row - Tried looping through playerDiceRollArray but I could not
+            // get it to work as I wanted, so I had to manually feed the formatter the
+            // individual values
             System.out.printf(rowFormat,
-                    player.name,
-                    (Object[]) player.getDiceRollArray(),
-                    player.totalScore);
+                    playersList[playerIndex].name,
+                    playersDiceRollArray[0], playersDiceRollArray[1], playersDiceRollArray[2],
+                    playersDiceRollArray[3], playersDiceRollArray[4], playersDiceRollArray[5],
+                    playersDiceRollArray[6], playersDiceRollArray[7], playersDiceRollArray[8],
+                    playersDiceRollArray[9], playersDiceRollArray[10],
+                    playersList[playerIndex].totalScore);
+
         }
 
-        System.out.println("----------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------");
     }
 
     public void compareTotalScores() {
