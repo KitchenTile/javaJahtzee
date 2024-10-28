@@ -3,8 +3,10 @@ package JAVAPROJECT.CLASSES;
 import java.util.Arrays;
 import java.util.Scanner;
 
-//in this class we are going to create an array with all the columns initialized at 0,
-//then we are going to ask the player where they want to put the dice roll, if the column is full, ask again.
+// in the class Player we:
+// - set what a "Player" is.
+// - set the logic for assigning our rolls to columns.
+// - set our turn logic to be ran by Game.
 
 public class Player {
 
@@ -72,6 +74,7 @@ public class Player {
     public void turn(boolean[] firstTurnArray) {
 
         unselectedValidColumn = false;
+        int columnIndex;
 
         // call the function to roll dice and get the added value
         dice.generateDice();
@@ -79,17 +82,18 @@ public class Player {
 
         // while loop to make sure the selected
         while (!unselectedValidColumn) {
-            if (turnOne) {
-                Scanner input = new Scanner(System.in);
-                System.out.print(
-                        "What column would you like to assing this value to? (2-12 value - COLUMN MUST BE UNIQUE) ");
-                int columnIndex = input.nextInt();
+            Scanner input = new Scanner(System.in);
+            System.out.print(
+                    "What column would you like to assing this value to? (2-12 value - COLUMN MUST BE UNIQUE ON TURN 1) ");
 
+            while (!input.hasNextInt()) {
+                System.out.print("Please enter a valid number! Choose new column: ");
+                input.next();
+            }
+            columnIndex = input.nextInt();
+            if (turnOne) {
                 setRollToColumn(firstTurnArray, true, columnIndex);
             } else {
-                Scanner input = new Scanner(System.in);
-                System.out.print("What column would you like to assing this value to? (2-12 value) ");
-                int columnIndex = input.nextInt();
                 setRollToColumn(firstTurnArray, false, columnIndex);
             }
         }
