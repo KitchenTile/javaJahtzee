@@ -2,6 +2,10 @@ package JAVAPROJECT.CLASSES;
 
 import java.util.Arrays;
 
+// in the Dice class we:
+// - roll our dice.
+// - sum up the values.
+
 public class Dice {
 
     // create an array for the dice resoults
