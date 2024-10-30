@@ -11,7 +11,6 @@ public class Dice {
     // create an array for the dice resoults
     int[] diceArray;
 
-    // create constructor so hopefully the arrays keep their data
     public Dice() {
         diceArray = new int[2];
     }
@@ -29,7 +28,7 @@ public class Dice {
             diceArray[diceNumber] = randomNum;
         }
         // print the array
-        System.out.println("Rolled dice: " + Arrays.toString(diceArray));
+        System.out.println("\nRolled dice: " + Arrays.toString(diceArray) + "\n");
     }
 
     public int getRollValue() {
