@@ -249,15 +249,17 @@ public class Game {
         System.out.println("*** Strategic Dice Game ***");
         System.out.println("*".repeat(27) + "\n");
 
+        
+            System.out.println(
+                    "Three players take turn throwing two dice over 11 rounds \nThis is simulated at the console, with all players simply \ntaking turns at the keyboard. The game simply involves \nthrowing two dice in each round and selecting a column \nor position in the score table, but it is quite strategic \nin order to optimise scores. Note that for the first round \nplayers must select different columns ... let's play \n");
+
+
         // for the duration of a game play each player's turn -- need to add first turn
         // restriction
         for (int currentTurn = 0; currentTurn < NUMBEROFTURNS; currentTurn++) {
 
             // print round sign
             printSign(currentTurn);
-
-            System.out.println(
-                    "Three players take turn throwing two dice over 11 rounds \nThis is simulated at the console, with all players simply \ntaking turns at the keyboard. The game simply involves \nthrowing two dice in each round and selecting a column \nor position in the score table, but it is quite strategic \nin order to optimise scores. Note that for the first round \nplayers must select different columns ... let's play \n");
 
             for (int playerIndex = 0; playerIndex < playersList.length; playerIndex++) {
                 System.out.println(playersList[playerIndex].name + " to throw \n");
