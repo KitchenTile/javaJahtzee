@@ -1,6 +1,5 @@
 package JAVAPROJECT.CLASSES;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 // in the class Player we:
@@ -13,7 +12,7 @@ public class Player {
     // variable for each player's total score
     int totalScore;
 
-    // Array with 13 spaces for the roll results
+    // Array for the dice roll results
     int[] diceRollArray;
 
     // boolean to check if the column input is not repeated
@@ -27,15 +26,12 @@ public class Player {
 
     String name;
 
-    public Player() {
+    public Player(String name) {
         totalScore = 0;
-        diceRollArray = new int[11];
+        diceRollArray = new int[12];
         turnOne = true;
 
-        Scanner nameInput = new Scanner(System.in); // needs closing
-        System.out.print("Please enter your name: ");
-        name = nameInput.nextLine();
-
+        this.name = name;
     }
 
     private void setRollToColumn(boolean[] firstTurnArray, boolean isFirstTurn, int columnIndex) {
@@ -46,7 +42,7 @@ public class Player {
         // and the element in the array has to be untaken (equals to 0)
 
         // This first conditional only checks for the first two
-        if (columnIndex >= 2 && columnIndex <= diceRollArray.length + 1) {
+        if (columnIndex >= 2 && columnIndex <= diceRollArray.length) {
 
             // first turn
             if (isFirstTurn && !firstTurnArray[columnIndex - 2]) {
@@ -56,6 +52,10 @@ public class Player {
                 firstTurnArray[columnIndex - 2] = true;
                 unselectedValidColumn = true;
                 turnOne = false;
+
+                // if two players choose the same on turn 1 print error
+            } else if (isFirstTurn && firstTurnArray[columnIndex - 2]) {
+                System.out.println("For round 1 you must select a different column to other players");
 
                 // if it's turn 2+ check the index of the array has not been taken
             } else if (!isFirstTurn && diceRollArray[columnIndex - 2] == 0) {
@@ -78,13 +78,13 @@ public class Player {
 
         // call the function to roll dice and get the added value
         dice.generateDice();
-        System.out.println("You rolled a(n) " + dice.getRollValue() + " this turn.");
+        System.out.println("You scored " + dice.getRollValue() + "\n");
 
-        // while loop to make sure the selected
+        // select column to assign dice roll, best attempt at not repeating code
         while (!unselectedValidColumn) {
             Scanner input = new Scanner(System.in);
             System.out.print(
-                    "What column would you like to assing this value to? (2-12 value - COLUMN MUST BE UNIQUE ON TURN 1) ");
+                    "Enter the column in which you wish to insert your score (2 to 12) > ");
 
             while (!input.hasNextInt()) {
                 System.out.print("Please enter a valid number! Choose new column: ");
